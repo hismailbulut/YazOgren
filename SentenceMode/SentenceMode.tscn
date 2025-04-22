@@ -1,0 +1,421 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Font/word-font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://SentenceMode/SentenceMode.gd" type="Script" id=2]
+[ext_resource path="res://SentenceMode/S_Reader.gd" type="Script" id=3]
+[ext_resource path="res://ui/right.png" type="Texture" id=4]
+[ext_resource path="res://ui/return.png" type="Texture" id=5]
+[ext_resource path="res://ui/pause.png" type="Texture" id=6]
+[ext_resource path="res://ui/video.png" type="Texture" id=7]
+[ext_resource path="res://ui/home.png" type="Texture" id=8]
+[ext_resource path="res://Font/sentence-font.tres" type="DynamicFont" id=9]
+[ext_resource path="res://SentenceMode/S_Splitter.gd" type="Script" id=10]
+[ext_resource path="res://Sound/clicksound.ogg" type="AudioStream" id=11]
+[ext_resource path="res://SentenceMode/S_Keyboard.gd" type="Script" id=12]
+[ext_resource path="res://SentenceMode/S_TextEdit.gd" type="Script" id=13]
+[ext_resource path="res://Sound/missed.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Sound/correct.ogg" type="AudioStream" id=15]
+[ext_resource path="res://SentenceMode/S_Sentences.gd" type="Script" id=16]
+[ext_resource path="res://ui/under.png" type="Texture" id=17]
+[ext_resource path="res://ui/over.png" type="Texture" id=18]
+[ext_resource path="res://ui/progress.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/AdMob.tscn" type="PackedScene" id=20]
+[ext_resource path="res://SentenceMode/S_Admob.gd" type="Script" id=21]
+[ext_resource path="res://SentenceMode/S_PauseMenu.gd" type="Script" id=22]
+
+[node name="SentenceMode" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Admob" type="Node2D" parent="."]
+script = ExtResource( 21 )
+
+[node name="AdMob" parent="Admob" instance=ExtResource( 20 )]
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="correct_sound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+
+[node name="missed_sound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 14 )
+volume_db = 12.0
+
+[node name="click_sound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+volume_db = 16.0
+
+[node name="SentReader" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="canvas" type="CanvasLayer" parent="."]
+
+[node name="Splitter" type="VSplitContainer" parent="canvas"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+split_offset = 800
+dragger_visibility = 2
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GamePanel" type="Control" parent="canvas/Splitter"]
+margin_right = 450.0
+margin_bottom = 800.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="ColorRect" parent="canvas/Splitter/GamePanel"]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.9
+color = Color( 0.305882, 0.305882, 0.313726, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sentences" type="VBoxContainer" parent="canvas/Splitter/GamePanel/BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="en_center" type="MarginContainer" parent="canvas/Splitter/GamePanel/BG/Sentences"]
+margin_right = 450.0
+margin_bottom = 296.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 30
+custom_constants/margin_top = 100
+custom_constants/margin_left = 30
+
+[node name="en" type="Label" parent="canvas/Splitter/GamePanel/BG/Sentences/en_center"]
+margin_left = 30.0
+margin_top = 188.0
+margin_right = 420.0
+margin_bottom = 208.0
+custom_fonts/font = ExtResource( 9 )
+text = "ingilizce cümle"
+autowrap = true
+
+[node name="en_red" type="Label" parent="canvas/Splitter/GamePanel/BG/Sentences/en_center"]
+margin_left = 30.0
+margin_top = 188.0
+margin_right = 420.0
+margin_bottom = 208.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "ingilizce cümle"
+autowrap = true
+
+[node name="en_green" type="Label" parent="canvas/Splitter/GamePanel/BG/Sentences/en_center"]
+margin_left = 30.0
+margin_top = 188.0
+margin_right = 420.0
+margin_bottom = 208.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "ingilizce cümle"
+autowrap = true
+
+[node name="tr_center" type="MarginContainer" parent="canvas/Splitter/GamePanel/BG/Sentences"]
+margin_top = 300.0
+margin_right = 450.0
+margin_bottom = 596.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 30
+custom_constants/margin_left = 30
+custom_constants/margin_bottom = 100
+
+[node name="tr" type="Label" parent="canvas/Splitter/GamePanel/BG/Sentences/tr_center"]
+margin_left = 30.0
+margin_top = 88.0
+margin_right = 420.0
+margin_bottom = 108.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 0.470588 )
+text = "türkçe cümle"
+autowrap = true
+
+[node name="countdownbar" type="TextureProgress" parent="canvas/Splitter/GamePanel/BG/Sentences"]
+margin_top = 600.0
+margin_right = 450.0
+margin_bottom = 640.0
+rect_min_size = Vector2( 0, 40 )
+step = 0.1
+value = 100.0
+texture_under = ExtResource( 17 )
+texture_over = ExtResource( 18 )
+texture_progress = ExtResource( 19 )
+tint_progress = Color( 0, 1, 0, 1 )
+nine_patch_stretch = true
+stretch_margin_left = 20
+stretch_margin_right = 20
+
+[node name="countdowntimer" type="Timer" parent="canvas/Splitter/GamePanel/BG/Sentences"]
+
+[node name="TextEdit" type="TextEdit" parent="canvas/Splitter/GamePanel"]
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+highlight_current_line = true
+draw_tabs = true
+draw_spaces = true
+fold_gutter = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+wrap_enabled = true
+caret_blink = true
+caret_moving_by_right_click = false
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPanelBG" type="ColorRect" parent="canvas/Splitter/GamePanel"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+color = Color( 0.392157, 0.392157, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopLabels" type="HBoxContainer" parent="canvas/Splitter/GamePanel"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = -3.8147e-06
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="correct_label" type="Label" parent="canvas/Splitter/GamePanel/TopLabels"]
+margin_left = 110.0
+margin_top = 31.0
+margin_right = 169.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 1 )
+text = "correct"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="missed_label" type="Label" parent="canvas/Splitter/GamePanel/TopLabels"]
+margin_left = 179.0
+margin_top = 31.0
+margin_right = 235.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 1 )
+text = "missed"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="st_label" type="Label" parent="canvas/Splitter/GamePanel/TopLabels"]
+margin_left = 245.0
+margin_top = 31.0
+margin_right = 261.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 1 )
+text = "st"
+align = 1
+valign = 1
+
+[node name="dk_label" type="Label" parent="canvas/Splitter/GamePanel/TopLabels"]
+margin_left = 271.0
+margin_top = 31.0
+margin_right = 291.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 1 )
+text = "dk"
+align = 1
+valign = 1
+
+[node name="time_label" type="Label" parent="canvas/Splitter/GamePanel/TopLabels"]
+margin_left = 301.0
+margin_top = 31.0
+margin_right = 339.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 1 )
+text = "time"
+align = 1
+valign = 1
+
+[node name="PauseBTN" type="TextureButton" parent="canvas/Splitter/GamePanel"]
+anchor_left = 0.9
+anchor_right = 1.0
+anchor_bottom = 0.1
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseMenu" type="Panel" parent="canvas/Splitter/GamePanel"]
+pause_mode = 2
+visible = false
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="canvas/Splitter/GamePanel/PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameover_label" type="Label" parent="canvas/Splitter/GamePanel/PauseMenu/vbox"]
+margin_right = 270.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+align = 1
+valign = 1
+
+[node name="score_label" type="Label" parent="canvas/Splitter/GamePanel/PauseMenu/vbox"]
+margin_top = 79.0
+margin_right = 270.0
+margin_bottom = 154.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+align = 1
+valign = 1
+
+[node name="info_label" type="Label" parent="canvas/Splitter/GamePanel/PauseMenu/vbox"]
+margin_top = 158.0
+margin_right = 270.0
+margin_bottom = 233.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+align = 1
+valign = 1
+
+[node name="buttons" type="HBoxContainer" parent="canvas/Splitter/GamePanel/PauseMenu/vbox"]
+margin_top = 237.0
+margin_right = 270.0
+margin_bottom = 312.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="home_button" type="TextureButton" parent="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons"]
+margin_right = 64.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+
+[node name="reset_button" type="TextureButton" parent="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons"]
+margin_left = 68.0
+margin_right = 133.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="reward_button" type="TextureButton" parent="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons"]
+margin_left = 137.0
+margin_right = 201.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="resume_button" type="TextureButton" parent="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons"]
+margin_left = 205.0
+margin_right = 270.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="KeyboardBG" type="ColorRect" parent="canvas/Splitter"]
+margin_top = 800.0
+margin_right = 450.0
+margin_bottom = 800.0
+color = Color( 0.152941, 0.152941, 0.152941, 1 )
+
+[node name="Keyboard" type="VBoxContainer" parent="canvas/Splitter/KeyboardBG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="h_1" type="HBoxContainer" parent="canvas/Splitter/KeyboardBG/Keyboard"]
+margin_right = 450.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h_2" type="HBoxContainer" parent="canvas/Splitter/KeyboardBG/Keyboard"]
+margin_top = 4.0
+margin_right = 450.0
+margin_bottom = 4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h_3" type="HBoxContainer" parent="canvas/Splitter/KeyboardBG/Keyboard"]
+margin_top = 8.0
+margin_right = 450.0
+margin_bottom = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h_4" type="HBoxContainer" parent="canvas/Splitter/KeyboardBG/Keyboard"]
+margin_top = 12.0
+margin_right = 450.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h_5" type="HBoxContainer" parent="canvas/Splitter/KeyboardBG/Keyboard"]
+margin_top = 16.0
+margin_right = 450.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+[connection signal="interstitial_failed_to_load" from="Admob/AdMob" to="Admob" method="_on_AdMob_interstitial_failed_to_load"]
+[connection signal="interstitial_loaded" from="Admob/AdMob" to="Admob" method="_on_AdMob_interstitial_loaded"]
+[connection signal="rewarded" from="Admob/AdMob" to="Admob" method="_on_AdMob_rewarded"]
+[connection signal="rewarded_video_closed" from="Admob/AdMob" to="Admob" method="_on_AdMob_rewarded_video_closed"]
+[connection signal="rewarded_video_failed_to_load" from="Admob/AdMob" to="Admob" method="_on_AdMob_rewarded_video_failed_to_load"]
+[connection signal="rewarded_video_loaded" from="Admob/AdMob" to="Admob" method="_on_AdMob_rewarded_video_loaded"]
+[connection signal="timeout" from="canvas/Splitter/GamePanel/BG/Sentences/countdowntimer" to="canvas/Splitter/GamePanel/BG/Sentences" method="_on_countdowntimer_timeout"]
+[connection signal="text_changed" from="canvas/Splitter/GamePanel/TextEdit" to="canvas/Splitter/GamePanel/TextEdit" method="_on_TextEdit_text_changed"]
+[connection signal="pressed" from="canvas/Splitter/GamePanel/PauseBTN" to="canvas/Splitter/GamePanel/PauseMenu" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons/home_button" to="canvas/Splitter/GamePanel/PauseMenu" method="_on_home_button_pressed"]
+[connection signal="pressed" from="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons/reset_button" to="canvas/Splitter/GamePanel/PauseMenu" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons/reward_button" to="canvas/Splitter/GamePanel/PauseMenu" method="_on_reward_button_pressed"]
+[connection signal="pressed" from="canvas/Splitter/GamePanel/PauseMenu/vbox/buttons/resume_button" to="canvas/Splitter/GamePanel/PauseMenu" method="_on_resume_button_pressed"]

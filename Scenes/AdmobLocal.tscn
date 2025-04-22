@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/AdMob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/AdmobLocal.gd" type="Script" id=2]
+
+[node name="AdmobLocal" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AdMob" parent="." instance=ExtResource( 1 )]
+[connection signal="interstitial_failed_to_load" from="AdMob" to="." method="_on_AdMob_interstitial_failed_to_load"]
+[connection signal="interstitial_loaded" from="AdMob" to="." method="_on_AdMob_interstitial_loaded"]
+[connection signal="rewarded" from="AdMob" to="." method="_on_AdMob_rewarded"]
+[connection signal="rewarded_video_closed" from="AdMob" to="." method="_on_AdMob_rewarded_video_closed"]
+[connection signal="rewarded_video_failed_to_load" from="AdMob" to="." method="_on_AdMob_rewarded_video_failed_to_load"]
+[connection signal="rewarded_video_loaded" from="AdMob" to="." method="_on_AdMob_rewarded_video_loaded"]

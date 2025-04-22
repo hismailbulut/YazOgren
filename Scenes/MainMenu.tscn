@@ -1,0 +1,481 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scenes/DefaultButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/AdmobBanner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/HSDownloader.gd" type="Script" id=4]
+[ext_resource path="res://ui/exit.png" type="Texture" id=5]
+[ext_resource path="res://ui/audioOn.png" type="Texture" id=6]
+[ext_resource path="res://ui/leaderboardsComplex.png" type="Texture" id=7]
+[ext_resource path="res://ui/question.png" type="Texture" id=8]
+[ext_resource path="res://ui/gear.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/MainMenuItems.gd" type="Script" id=10]
+[ext_resource path="res://ui/cross.png" type="Texture" id=11]
+[ext_resource path="res://ui/save.png" type="Texture" id=12]
+[ext_resource path="res://Font/word-font.tres" type="DynamicFont" id=13]
+[ext_resource path="res://Scripts/SettingsPanelMenu.gd" type="Script" id=14]
+[ext_resource path="res://Font/main-menu-font.tres" type="DynamicFont" id=15]
+[ext_resource path="res://Scripts/NameMenu.gd" type="Script" id=16]
+[ext_resource path="res://Scripts/LeaderBoardsList.gd" type="Script" id=17]
+[ext_resource path="res://Scripts/NameControl.gd" type="Script" id=18]
+[ext_resource path="res://Scenes/GooglePlayBilling.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scripts/PopupMenu.gd" type="Script" id=20]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="GooglePlayBilling" parent="." instance=ExtResource( 19 )]
+
+[node name="AdmobBanner" parent="." instance=ExtResource( 3 )]
+
+[node name="MainMenuItems" type="CanvasLayer" parent="."]
+script = ExtResource( 10 )
+
+[node name="background_color" type="ColorRect" parent="MainMenuItems"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.4, 0.596078, 0.592157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="parent_control" type="Control" parent="MainMenuItems"]
+anchor_right = 1.0
+anchor_bottom = 0.85
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bottom_container" type="HBoxContainer" parent="MainMenuItems/parent_control"]
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit_button" type="TextureButton" parent="MainMenuItems/parent_control/bottom_container"]
+margin_right = 86.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="leaderboards_button" type="TextureButton" parent="MainMenuItems/parent_control/bottom_container"]
+margin_left = 90.0
+margin_right = 177.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="help_button" type="TextureButton" parent="MainMenuItems/parent_control/bottom_container"]
+margin_left = 181.0
+margin_right = 268.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+
+[node name="sounds_button" type="TextureButton" parent="MainMenuItems/parent_control/bottom_container"]
+margin_left = 272.0
+margin_right = 359.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="settings_button" type="TextureButton" parent="MainMenuItems/parent_control/bottom_container"]
+margin_left = 363.0
+margin_right = 450.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="middle_buttons_container" type="VBoxContainer" parent="MainMenuItems/parent_control"]
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start_button" parent="MainMenuItems/parent_control/middle_buttons_container" instance=ExtResource( 1 )]
+margin_right = 315.0
+margin_bottom = 111.0
+
+[node name="sentence_mode_button" parent="MainMenuItems/parent_control/middle_buttons_container" instance=ExtResource( 1 )]
+margin_top = 115.0
+margin_right = 315.0
+margin_bottom = 226.0
+
+[node name="welcome_label" type="Label" parent="MainMenuItems/parent_control/middle_buttons_container"]
+margin_top = 230.0
+margin_right = 315.0
+margin_bottom = 341.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 15 )
+text = "welcome"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="hs_label" type="Label" parent="MainMenuItems/parent_control/middle_buttons_container"]
+margin_top = 345.0
+margin_right = 315.0
+margin_bottom = 456.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 15 )
+text = "hs"
+align = 1
+valign = 1
+
+[node name="center" type="CenterContainer" parent="MainMenuItems/parent_control/middle_buttons_container"]
+margin_top = 460.0
+margin_right = 315.0
+margin_bottom = 476.0
+
+[node name="remove_ads_button" type="LinkButton" parent="MainMenuItems/parent_control/middle_buttons_container/center"]
+margin_left = 87.0
+margin_right = 227.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0.356863, 0.631373, 0.372549, 1 )
+custom_fonts/font = ExtResource( 13 )
+text = "Reklamları Kaldır"
+
+[node name="LeaderBoardsList" type="PanelContainer" parent="MainMenuItems/parent_control"]
+visible = false
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSDownloader" type="HTTPRequest" parent="MainMenuItems/parent_control/LeaderBoardsList"]
+script = ExtResource( 4 )
+
+[node name="scroll" type="ScrollContainer" parent="MainMenuItems/parent_control/LeaderBoardsList"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 308.0
+margin_bottom = 469.0
+
+[node name="grid" type="GridContainer" parent="MainMenuItems/parent_control/LeaderBoardsList/scroll"]
+margin_right = 301.0
+margin_bottom = 462.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 1
+custom_constants/hseparation = 0
+
+[node name="InfoMenu" type="PanelContainer" parent="MainMenuItems/parent_control"]
+visible = false
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+
+[node name="info" type="RichTextLabel" parent="MainMenuItems/parent_control/InfoMenu"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 308.0
+margin_bottom = 469.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/line_separation = 3
+custom_fonts/normal_font = ExtResource( 13 )
+text = "Bu oyun hem klavye hızınızı geliştirirken hem de İngilizce kelimeleri öğrenmenizi amaçlamaktadır. Oyuna başladığınızda İngilizce kelimeler altındaki Türkçe karşılıklarıyla birlikte yukarıdan aşağıya düşmeye başlar. Sizden beklenen hızlı bir şekilde kelimelerin İngilizce'sini yazmanızdır. Toplam 10 kelime kaçırma hakkınız bulunmaktadır. Reklam videosu izlerseniz +5 hak elde edersiniz. Eğer reklamları kaldırma paketi aldıysanız her oyuna direkt 15 hakla başlarsınız. ST saniyede bastığınız ortalama doğru tuş sayısını, DK ise dakikada doğru yazdığınız ortalama kelime sayısını gösterir. Grafik ve sesler kenney.nl ve zapsplat.com'dan alınmıştır. Yüksek skor hizmetini de dreamlo.com sağlamaktadır."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsPanelMenu" type="PanelContainer" parent="MainMenuItems/parent_control"]
+visible = false
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="MainMenuItems/parent_control/SettingsPanelMenu"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 308.0
+margin_bottom = 469.0
+
+[node name="bs_info" type="Label" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_right = 301.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 13 )
+text = "Buton rengi:"
+
+[node name="styles" type="ItemList" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 20.0
+margin_right = 301.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 13 )
+auto_height = true
+same_column_width = true
+
+[node name="mykb" type="HBoxContainer" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 87.0
+margin_right = 301.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="mykb_info" type="Label" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox/mykb"]
+margin_top = 24.0
+margin_right = 194.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 13 )
+text = "Yalnızca kendi klavyem"
+
+[node name="mykb_check" type="CheckBox" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox/mykb"]
+margin_left = 198.0
+margin_right = 301.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 2
+
+[node name="vibration" type="HBoxContainer" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 155.0
+margin_right = 301.0
+margin_bottom = 219.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vibration_info" type="Label" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox/vibration"]
+margin_top = 24.0
+margin_right = 67.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 13 )
+text = "Titreşim"
+
+[node name="vibration_check" type="CheckBox" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox/vibration"]
+margin_left = 71.0
+margin_right = 301.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 1
+
+[node name="bg_info" type="Label" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 223.0
+margin_right = 301.0
+margin_bottom = 239.0
+custom_fonts/font = ExtResource( 13 )
+text = "Arka plan rengi:"
+
+[node name="bg_color_picker" type="ColorPickerButton" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 243.0
+margin_right = 301.0
+margin_bottom = 306.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 13 )
+edit_alpha = false
+
+[node name="gtc_info" type="Label" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 310.0
+margin_right = 301.0
+margin_bottom = 326.0
+custom_fonts/font = ExtResource( 13 )
+text = "Oyun içindeki üst panel rengi:"
+
+[node name="gtp_color_picker" type="ColorPickerButton" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 330.0
+margin_right = 301.0
+margin_bottom = 394.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 13 )
+edit_alpha = false
+
+[node name="save_close" type="HBoxContainer" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox"]
+margin_top = 398.0
+margin_right = 301.0
+margin_bottom = 462.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="close_button" type="TextureButton" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox/save_close"]
+margin_right = 148.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 11 )
+expand = true
+stretch_mode = 5
+
+[node name="save_button" type="TextureButton" parent="MainMenuItems/parent_control/SettingsPanelMenu/vbox/save_close"]
+margin_left = 152.0
+margin_right = 301.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+
+[node name="NameMenu" type="PanelContainer" parent="MainMenuItems/parent_control"]
+visible = false
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+script = ExtResource( 16 )
+
+[node name="NameControl" type="HTTPRequest" parent="MainMenuItems/parent_control/NameMenu"]
+script = ExtResource( 18 )
+
+[node name="vbox" type="VBoxContainer" parent="MainMenuItems/parent_control/NameMenu"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 308.0
+margin_bottom = 469.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="VBoxContainer" parent="MainMenuItems/parent_control/NameMenu/vbox"]
+margin_right = 301.0
+margin_bottom = 46.0
+
+[node name="name_label" type="Label" parent="MainMenuItems/parent_control/NameMenu/vbox/name"]
+margin_right = 301.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 13 )
+text = "Kullanıcı Adı:"
+align = 1
+
+[node name="name_edit" type="LineEdit" parent="MainMenuItems/parent_control/NameMenu/vbox/name"]
+margin_top = 20.0
+margin_right = 301.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 13 )
+align = 1
+max_length = 14
+clear_button_enabled = true
+
+[node name="warning_info" type="RichTextLabel" parent="MainMenuItems/parent_control/NameMenu/vbox"]
+margin_top = 50.0
+margin_right = 301.0
+margin_bottom = 184.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 13 )
+
+[node name="name_info" type="RichTextLabel" parent="MainMenuItems/parent_control/NameMenu/vbox"]
+margin_top = 188.0
+margin_right = 301.0
+margin_bottom = 323.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/line_separation = 3
+custom_fonts/normal_font = ExtResource( 13 )
+text = "Her gün sana hoşgeldin
+diyebilmemiz için ve yüksek
+skor ekranında adının
+görünebilmesi için bir kullanıcı
+adı gir. Unutma! Daha sonra
+kullanıcı adını değiştiremezsin."
+
+[node name="name_save_button" type="TextureButton" parent="MainMenuItems/parent_control/NameMenu/vbox"]
+margin_top = 327.0
+margin_right = 301.0
+margin_bottom = 462.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+
+[node name="PopupMenu" type="PanelContainer" parent="MainMenuItems"]
+visible = false
+anchor_left = 0.2
+anchor_top = 0.3
+anchor_right = 0.8
+anchor_bottom = 0.6
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vsplit" type="VSplitContainer" parent="MainMenuItems/PopupMenu"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 263.0
+margin_bottom = 233.0
+split_offset = 100
+dragger_visibility = 2
+
+[node name="popup_label" type="RichTextLabel" parent="MainMenuItems/PopupMenu/vsplit"]
+margin_right = 256.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 13 )
+
+[node name="center_button" type="CenterContainer" parent="MainMenuItems/PopupMenu/vsplit"]
+margin_top = 186.0
+margin_right = 256.0
+margin_bottom = 226.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ok_button" type="Button" parent="MainMenuItems/PopupMenu/vsplit/center_button"]
+margin_left = 78.0
+margin_right = 178.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 13 )
+text = "Tamam"
+
+[connection signal="pressed" from="MainMenuItems/parent_control/bottom_container/exit_button" to="MainMenuItems" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/bottom_container/leaderboards_button" to="MainMenuItems/parent_control/LeaderBoardsList" method="_on_leaderboards_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/bottom_container/help_button" to="MainMenuItems" method="_on_help_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/bottom_container/sounds_button" to="MainMenuItems" method="_on_sounds_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/bottom_container/settings_button" to="MainMenuItems" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/middle_buttons_container/start_button" to="MainMenuItems" method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/middle_buttons_container/sentence_mode_button" to="MainMenuItems" method="_on_sentence_mode_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/middle_buttons_container/center/remove_ads_button" to="GooglePlayBilling" method="_on_remove_ads_button_pressed"]
+[connection signal="request_completed" from="MainMenuItems/parent_control/LeaderBoardsList/HSDownloader" to="MainMenuItems/parent_control/LeaderBoardsList" method="_on_HSDownloader_request_completed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/SettingsPanelMenu/vbox/save_close/close_button" to="MainMenuItems" method="_on_close_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/SettingsPanelMenu/vbox/save_close/save_button" to="MainMenuItems/parent_control/SettingsPanelMenu" method="_on_save_button_pressed"]
+[connection signal="request_completed" from="MainMenuItems/parent_control/NameMenu/NameControl" to="MainMenuItems/parent_control/NameMenu" method="_on_NameControl_request_completed"]
+[connection signal="pressed" from="MainMenuItems/parent_control/NameMenu/vbox/name_save_button" to="MainMenuItems/parent_control/NameMenu" method="_on_name_save_button_pressed"]
+[connection signal="pressed" from="MainMenuItems/PopupMenu/vsplit/center_button/ok_button" to="MainMenuItems/PopupMenu" method="_on_ok_button_pressed"]

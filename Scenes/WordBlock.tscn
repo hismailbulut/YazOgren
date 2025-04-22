@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Font/word-font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/WordBlock.gd" type="Script" id=2]
+
+[node name="WordBlock" type="VBoxContainer"]
+margin_right = 87.0
+margin_bottom = 44.0
+alignment = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="colored_word" type="CenterContainer" parent="."]
+margin_top = 4.0
+margin_right = 87.0
+margin_bottom = 20.0
+
+[node name="enword" type="Label" parent="colored_word"]
+margin_left = 14.0
+margin_right = 73.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "english"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enword_red" type="Label" parent="colored_word"]
+margin_left = 14.0
+margin_right = 73.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "english"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enword_color" type="Label" parent="colored_word"]
+margin_left = 14.0
+margin_right = 73.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "english"
+align = 1
+valign = 1
+percent_visible = 0.428571
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="second_word" type="CenterContainer" parent="."]
+margin_top = 24.0
+margin_right = 87.0
+margin_bottom = 40.0
+
+[node name="trword" type="Label" parent="second_word"]
+margin_left = 17.0
+margin_right = 70.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 0.470588 )
+text = "türkçe"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

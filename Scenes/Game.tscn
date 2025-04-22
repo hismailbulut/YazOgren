@@ -1,0 +1,324 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/FileReader.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/ActiveWords.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/TextEdit.gd" type="Script" id=4]
+[ext_resource path="res://Font/word-font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Scripts/Keyboard.gd" type="Script" id=6]
+[ext_resource path="res://ui/pause.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/PauseMenu.gd" type="Script" id=8]
+[ext_resource path="res://Sound/clicksound.ogg" type="AudioStream" id=9]
+[ext_resource path="res://ui/home.png" type="Texture" id=10]
+[ext_resource path="res://Scripts/SplitManager.gd" type="Script" id=11]
+[ext_resource path="res://ui/return.png" type="Texture" id=12]
+[ext_resource path="res://ui/video.png" type="Texture" id=13]
+[ext_resource path="res://ui/right.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/AdmobLocal.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Sound/missed.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sound/correct.ogg" type="AudioStream" id=17]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="correct_sound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 17 )
+
+[node name="missed_sound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 16 )
+volume_db = 12.0
+
+[node name="click_sound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 9 )
+volume_db = 16.0
+
+[node name="FileReader" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="AdmobLocal" parent="." instance=ExtResource( 15 )]
+pause_mode = 2
+
+[node name="main_control" type="CanvasLayer" parent="."]
+
+[node name="SplitManager" type="VSplitContainer" parent="main_control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+split_offset = 800
+dragger_visibility = 2
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GamePanel" type="Control" parent="main_control/SplitManager"]
+margin_right = 450.0
+margin_bottom = 800.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg_color" type="ColorRect" parent="main_control/SplitManager/GamePanel"]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.9
+color = Color( 0.305882, 0.305882, 0.313726, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActiveWords" type="Node2D" parent="main_control/SplitManager/GamePanel"]
+script = ExtResource( 3 )
+
+[node name="TextEdit" type="LineEdit" parent="main_control/SplitManager/GamePanel"]
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 5 )
+align = 1
+max_length = 100
+expand_to_text_length = true
+context_menu_enabled = false
+selecting_enabled = false
+placeholder_text = "yazmaya başla"
+placeholder_alpha = 0.5
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gtp_color" type="ColorRect" parent="main_control/SplitManager/GamePanel"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+color = Color( 0.392157, 0.392157, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cm_labels" type="HBoxContainer" parent="main_control/SplitManager/GamePanel"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = -3.8147e-06
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="correct_label" type="Label" parent="main_control/SplitManager/GamePanel/cm_labels"]
+margin_left = 110.0
+margin_top = 31.0
+margin_right = 169.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 5 )
+text = "correct"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="missed_label" type="Label" parent="main_control/SplitManager/GamePanel/cm_labels"]
+margin_left = 179.0
+margin_top = 31.0
+margin_right = 235.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 5 )
+text = "missed"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="st_label" type="Label" parent="main_control/SplitManager/GamePanel/cm_labels"]
+margin_left = 245.0
+margin_top = 31.0
+margin_right = 261.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 5 )
+text = "st"
+align = 1
+valign = 1
+
+[node name="dk_label" type="Label" parent="main_control/SplitManager/GamePanel/cm_labels"]
+margin_left = 271.0
+margin_top = 31.0
+margin_right = 291.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 5 )
+text = "dk"
+align = 1
+valign = 1
+
+[node name="time_label" type="Label" parent="main_control/SplitManager/GamePanel/cm_labels"]
+margin_left = 301.0
+margin_top = 31.0
+margin_right = 339.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 5 )
+text = "time"
+align = 1
+valign = 1
+
+[node name="pause_button" type="TextureButton" parent="main_control/SplitManager/GamePanel"]
+anchor_left = 0.9
+anchor_right = 1.0
+anchor_bottom = 0.1
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseMenu" type="Panel" parent="main_control/SplitManager/GamePanel"]
+pause_mode = 2
+visible = false
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="main_control/SplitManager/GamePanel/PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameover_label" type="Label" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox"]
+margin_right = 270.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+align = 1
+valign = 1
+
+[node name="score_label" type="Label" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox"]
+margin_top = 79.0
+margin_right = 270.0
+margin_bottom = 154.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+align = 1
+valign = 1
+
+[node name="info_label" type="Label" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox"]
+margin_top = 158.0
+margin_right = 270.0
+margin_bottom = 233.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 5 )
+align = 1
+valign = 1
+
+[node name="buttons" type="HBoxContainer" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox"]
+margin_top = 237.0
+margin_right = 270.0
+margin_bottom = 312.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="home_button" type="TextureButton" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons"]
+margin_right = 64.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
+[node name="reset_button" type="TextureButton" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons"]
+margin_left = 68.0
+margin_right = 133.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+
+[node name="reward_button" type="TextureButton" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons"]
+margin_left = 137.0
+margin_right = 201.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 13 )
+expand = true
+stretch_mode = 5
+
+[node name="resume_button" type="TextureButton" parent="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons"]
+margin_left = 205.0
+margin_right = 270.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="kb_background_color" type="ColorRect" parent="main_control/SplitManager"]
+margin_top = 800.0
+margin_right = 450.0
+margin_bottom = 800.0
+color = Color( 0.152941, 0.152941, 0.152941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keyboard" type="VBoxContainer" parent="main_control/SplitManager/kb_background_color"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="h_1" type="HBoxContainer" parent="main_control/SplitManager/kb_background_color/Keyboard"]
+margin_right = 450.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h_2" type="HBoxContainer" parent="main_control/SplitManager/kb_background_color/Keyboard"]
+margin_top = 4.0
+margin_right = 450.0
+margin_bottom = 4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h_3" type="HBoxContainer" parent="main_control/SplitManager/kb_background_color/Keyboard"]
+margin_top = 8.0
+margin_right = 450.0
+margin_bottom = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="h_4" type="HBoxContainer" parent="main_control/SplitManager/kb_background_color/Keyboard"]
+margin_top = 12.0
+margin_right = 450.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="text_changed" from="main_control/SplitManager/GamePanel/TextEdit" to="main_control/SplitManager/GamePanel/TextEdit" method="_on_TextEdit_text_changed"]
+[connection signal="pressed" from="main_control/SplitManager/GamePanel/pause_button" to="main_control/SplitManager/GamePanel/PauseMenu" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons/home_button" to="main_control/SplitManager/GamePanel/PauseMenu" method="_on_home_button_pressed"]
+[connection signal="pressed" from="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons/reset_button" to="main_control/SplitManager/GamePanel/PauseMenu" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons/reward_button" to="main_control/SplitManager/GamePanel/PauseMenu" method="_on_reward_button_pressed"]
+[connection signal="pressed" from="main_control/SplitManager/GamePanel/PauseMenu/vbox/buttons/resume_button" to="main_control/SplitManager/GamePanel/PauseMenu" method="_on_resume_button_pressed"]
